@@ -143,3 +143,47 @@ puts "County3 Profit Method 2: $#{profit_by_county3_method2}"
 
 
 puts "Total Profit: $#{total_profit}"
+
+=begin
+
+# Output
+
+sandeepnunna at Sandeeps-MacBook-Pro in [BernardCorner]
+ (main) $ ruby bernard-corner.rb 
+
+Total Cost Price of Headphones in county Miami-Dade: 3000
+Total Markup Price of Headphones in county Miami-Dade: 37.5
+Tax in county: 0.06
+Total Selling Price after Tax of Headphones in county Miami-Dade: 3525.0
+
+Total Cost Price of Headphones in county Broward: 3000
+Total Markup Price of Headphones in county Broward: 39.0
+Tax in county: 0.07
+Total Selling Price after Tax of Headphones in county Broward: 3626.9999999999995
+
+Total Cost Price of Headphones in county Palm Beach: 3000
+Total Markup Price of Headphones in county Palm Beach: 39.0
+Tax in county: 0.08
+Total Selling Price after Tax of Headphones in county Palm Beach: 3588.0
+Product Name: Headphones
+Brand Name: JWT
+Cost Price: 30$
+
+County Name: Miami-Dade
+Tax: 6%
+
+County Name: Broward
+Tax: 7%
+
+County Name: Palm Beach
+Tax: 8%
+
+County1 Profit: $525.0
+County2 Profit: $627.0
+County3 Profit: $588.0
+County1 Profit Method 2: $525.0
+County2 Profit Method 2: $627.0
+County3 Profit Method 2: $588.0
+Total Profit: $1740.0
+
+=end
