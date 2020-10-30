@@ -4,17 +4,17 @@ We have 3 class objects Product, County and Product Markup.
 
 **Objects:**
 
-- **Product**
-  - **Product Name**
-  - **Brand Name**
-  - **Cost Price**
-- **County**
-  - **County Name**
-  - **Tax Percentage**
-- **Product Markup**
-  - **Product**
-  - **County**
-  - **Mark Up Price**
+- Product
+  - Product Name
+  - Brand Name
+  - Cost Price
+- County
+  - County Name
+  - Tax Percentage
+- Product Markup
+  - Product
+  - County
+  - Mark Up Price
 
 **ER DIAGRAM:**
 
