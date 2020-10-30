@@ -122,14 +122,27 @@ Product Name: Headphones
 Brand Name: JWT
 Cost Price: 30$
 
+------------------------------------
 County Name: Miami-Dade
+
 Tax: 6%
 
+MarkUp: 25%
+
+------------------------------------
 County Name: Broward
+
 Tax: 7%
 
+MarkUp: 30%
+
+------------------------------------
 County Name: Palm Beach
+
 Tax: 8%
 
+MarkUp: 30%
+
+------------------------------------
 Total Profit: $1740.0
 =end
