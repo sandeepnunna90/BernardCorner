@@ -24,7 +24,7 @@ class County
 
     # instance method
     def county_details
-        puts "County Name: #{name}\nTax: #{tax}%"
+        puts "County Name: #{name}\n\nTax: #{tax}%"
     end
 
     def tax_factor
@@ -44,8 +44,8 @@ class ProductMarkup
     attr_accessor :markUp
 
 
-    def markUp_factor
-        markUp/100.0
+    def markUp_details
+        puts "MarkUp: #{markUp}%"
     end
 
     def product_markup_price
@@ -65,106 +65,59 @@ class ProductMarkup
     def total_profit_by_quantity(qty)
         (profit * qty).round(2)
     end
-    
-    def profit_on_product_by_county(qty)
-        total_cost_price = product.cost_price * qty
-        puts "\nTotal Cost Price of #{product.name} in county #{county.name}: #{total_cost_price}"
 
-        product_markup_price = product.cost_price * (1 + (markUp/100.0))
-        puts "Total Markup Price of #{product.name} in county #{county.name}: #{product_markup_price}"
-
-        total_selling_price = (product_markup_price * qty) * (1 - (county.tax/100.0))
-        puts "Tax in county: #{(county.tax/100.0)}"
-
-        puts "Total Selling Price after Tax of #{product.name} in county #{county.name}: #{total_selling_price}"
-
-        (total_selling_price - total_cost_price).round(5)
+    def markUp_factor
+        markUp/100.0
     end
 end
 
-# class ProductSale
+class ProductController
 
-#     def initialize(product_with_markup)
-#         @product_details = product_with_markup
-#     end
+    def self.calculate_profit(product_details, quantity)
+        profit = 0
+        product_details.each do |productMarkupByCounty|
+            profit = profit + productMarkupByCounty.total_profit_by_quantity(quantity)
+        end
+        profit
+    end
+end
 
-#     def product_markup_price
-#         detail.cost_price * (1 + (markUp/100.0).round(2))
-#     end
-
-#     def total_price_with_tax_by_quantity
-#         (product_markup_price * qty) * (1 + (county.tax/100.0).round(2))
-#     end
- 
-#     def self.profit_on_product_by_county(product_details, qty)
-#         puts product_details
-#         total_cost_price = product_details.product.cost_price * qty
-#         product_markup_price = product_details.product.cost_price * (1 + (product_details.markUp/100.0).round(2))
-#         total_selling_price = (product_markup_price * qty) * (1 + (product_details.county.tax/100.0).round(2))
-#         total_selling_price - total_cost_price
-#     end
-# end
-
-
+# Data Setup
 product = Product.new('Headphones', 'JWT', 30)
+
 county1 = County.new('Miami-Dade', 6)
 county2 = County.new('Broward', 7)
 county3 = County.new('Palm Beach', 8)
+
 productMarkupCounty1 = ProductMarkup.new(product, county1, 25)
 productMarkupCounty2 = ProductMarkup.new(product, county2, 30)
 productMarkupCounty3 = ProductMarkup.new(product, county3, 30)
 
-# profit_by_county1 = ProductSale.profit_on_product_by_county(productMarkupCounty1, 100)
-# profit_by_county2 = ProductSale.profit_on_product_by_county(productMarkupCounty2, 100)
-# profit_by_county3 = ProductSale.profit_on_product_by_county(productMarkupCounty3, 100)
-
-profit_by_county1 = productMarkupCounty1.profit_on_product_by_county(100)
-profit_by_county2 = productMarkupCounty2.profit_on_product_by_county(100)
-profit_by_county3 = productMarkupCounty3.profit_on_product_by_county(100)
-
-profit_by_county1_method2 = productMarkupCounty1.total_profit_by_quantity(100)
-profit_by_county2_method2 = productMarkupCounty2.total_profit_by_quantity(100)
-profit_by_county3_method2 = productMarkupCounty3.total_profit_by_quantity(100)
-
-total_profit = profit_by_county1 + profit_by_county2 + profit_by_county3
-
 puts product.product_details
+puts "------------------------------------"
 puts county1.county_details
+puts productMarkupCounty1.markUp_details
+puts "------------------------------------"
 puts county2.county_details
+puts productMarkupCounty2.markUp_details
+puts "------------------------------------"
 puts county3.county_details
+puts productMarkupCounty3.markUp_details
 
-puts "County1 Profit: $#{profit_by_county1}"
-puts "County2 Profit: $#{profit_by_county2}"
-puts "County3 Profit: $#{profit_by_county3}"
+productDetails = [productMarkupCounty1, productMarkupCounty2, productMarkupCounty3]
+quantity = 100
 
-puts "County1 Profit Method 2: $#{profit_by_county1_method2}"
-puts "County2 Profit Method 2: $#{profit_by_county2_method2}"
-puts "County3 Profit Method 2: $#{profit_by_county3_method2}"
+# Fetch - Profit
 
+total_profit = ProductController.calculate_profit(productDetails, quantity)
 
+puts "------------------------------------"
 puts "Total Profit: $#{total_profit}"
 
 =begin
 
-# Output
+### Output
 
-sandeepnunna at Sandeeps-MacBook-Pro in [BernardCorner]
- (main) $ ruby bernard-corner.rb 
-
-Total Cost Price of Headphones in county Miami-Dade: 3000
-Total Markup Price of Headphones in county Miami-Dade: 37.5
-Tax in county: 0.06
-Total Selling Price after Tax of Headphones in county Miami-Dade: 3525.0
-
-Total Cost Price of Headphones in county Broward: 3000
-Total Markup Price of Headphones in county Broward: 39.0
-Tax in county: 0.07
-Total Selling Price after Tax of Headphones in county Broward: 3626.9999999999995
-
-Total Cost Price of Headphones in county Palm Beach: 3000
-Total Markup Price of Headphones in county Palm Beach: 39.0
-Tax in county: 0.08
-Total Selling Price after Tax of Headphones in county Palm Beach: 3588.0
 Product Name: Headphones
 Brand Name: JWT
 Cost Price: 30$
@@ -178,12 +131,5 @@ Tax: 7%
 County Name: Palm Beach
 Tax: 8%
 
-County1 Profit: $525.0
-County2 Profit: $627.0
-County3 Profit: $588.0
-County1 Profit Method 2: $525.0
-County2 Profit Method 2: $627.0
-County3 Profit Method 2: $588.0
 Total Profit: $1740.0
-
 =end
